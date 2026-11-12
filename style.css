@@ -1,0 +1,161 @@
+/* Broadway Maurquee — colors live here so they're easy to change */
+:root {
+  --navy: #0b1f4d;
+  --navy-2: #12306e;
+  --blue: #1f5fbf;
+  --sky: #8fc1ff;
+  --ice: #eaf2ff;
+  --paper: #f6f9ff;
+  --ink: #14213d;
+  --muted: #51607a;
+  --bulb: #ffd86b;
+  --warn: #b3261e;
+  --warn-bg: #fdecea;
+  --line: #d3e0f5;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+body {
+  margin: 0;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+}
+a { color: var(--blue); }
+a:hover { color: var(--navy); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* numbers, prices, times */
+.num, table.prices td.price, code {
+  font-family: Consolas, "Courier New", monospace;
+}
+
+/* ---------- nav ---------- */
+nav.top {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--navy);
+  border-bottom: 3px solid var(--blue);
+}
+nav.top .wrap {
+  display: flex; align-items: center; gap: 4px;
+  overflow-x: auto; white-space: nowrap;
+  padding: 0 16px; max-width: 1040px; margin: 0 auto;
+}
+nav.top .brand { color: #fff; font-weight: bold; text-decoration: none; margin-right: auto; padding: 14px 8px 14px 0; }
+nav.top .brand span { color: var(--bulb); }
+nav.top a.link { color: var(--ice); text-decoration: none; padding: 14px 10px; font-size: 14px; }
+nav.top a.link:hover { color: #fff; background: var(--navy-2); }
+
+/* ---------- hero / marquee ---------- */
+header.hero {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: #fff; text-align: center; padding: 56px 16px 64px;
+}
+.marquee {
+  display: inline-block; padding: 22px 34px; border-radius: 10px;
+  background: #081638; border: 3px solid var(--blue);
+  box-shadow: 0 0 0 6px #081638, 0 0 28px rgba(143,193,255,.35);
+  position: relative;
+}
+.marquee::before, .marquee::after {
+  content: ""; position: absolute; left: 12px; right: 12px; height: 8px;
+  background: radial-gradient(circle, var(--bulb) 3px, transparent 4px) 0 0 / 18px 8px repeat-x;
+}
+.marquee::before { top: 6px; }
+.marquee::after { bottom: 6px; }
+.marquee h1 { margin: 6px 0 2px; font-size: clamp(28px, 6vw, 52px); letter-spacing: 2px; text-transform: uppercase; }
+.marquee h1 .maur { color: var(--bulb); }
+.marquee p { margin: 0 0 6px; color: var(--sky); }
+header.hero .tag { max-width: 560px; margin: 26px auto 0; color: var(--ice); }
+
+.jump {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;
+  max-width: 1040px; margin: -36px auto 0; padding: 0 16px; position: relative;
+}
+.jump a {
+  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--blue);
+  border-radius: 8px; padding: 16px; text-decoration: none; color: var(--ink);
+  box-shadow: 0 4px 14px rgba(11,31,77,.08);
+}
+.jump a:hover { border-top-color: var(--bulb); }
+.jump strong { display: block; color: var(--navy); margin-bottom: 4px; }
+.jump span { font-size: 14px; color: var(--muted); }
+
+/* ---------- sections ---------- */
+main { max-width: 1040px; margin: 0 auto; padding: 0 16px 60px; }
+section { padding-top: 56px; }
+h2 {
+  color: var(--navy); font-size: 28px; margin: 0 0 6px;
+  border-bottom: 3px solid var(--blue); padding-bottom: 6px;
+}
+h3 { color: var(--navy-2); margin: 34px 0 10px; font-size: 21px; }
+h4 { margin: 0 0 6px; color: var(--navy); font-size: 17px; }
+.lede { color: var(--muted); margin-top: 8px; }
+
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.toc a {
+  display: inline-block; padding: 6px 12px; border-radius: 999px; font-size: 14px;
+  background: var(--ice); color: var(--navy); text-decoration: none; border: 1px solid var(--line);
+}
+.toc a:hover { background: var(--blue); color: #fff; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.card {
+  background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px;
+}
+.card ul { margin: 6px 0 0; padding-left: 20px; }
+.card li { margin: 4px 0; }
+.card .meta { font-size: 13px; color: var(--muted); margin: -2px 0 8px; }
+.pill {
+  display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+  background: var(--ice); color: var(--navy-2); border: 1px solid var(--line); margin-left: 6px;
+  vertical-align: middle; font-weight: normal;
+}
+
+/* price cheat sheet */
+.table-wrap { overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+table.prices { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; }
+table.prices th, table.prices td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+table.prices th { background: var(--navy); color: #fff; font-weight: normal; }
+table.prices td.price { white-space: nowrap; color: var(--navy-2); font-weight: bold; }
+table.prices tr:last-child td { border-bottom: 0; }
+.fine { font-size: 13px; color: var(--muted); }
+
+/* screenshots */
+details.shot { margin-top: 10px; }
+details.shot summary { cursor: pointer; color: var(--blue); font-size: 14px; }
+details.shot img { margin-top: 10px; border: 1px solid var(--line); border-radius: 6px; }
+
+/* callouts */
+.warn {
+  background: var(--warn-bg); border-left: 5px solid var(--warn);
+  padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+}
+.warn h4 { color: var(--warn); }
+.tip { background: var(--ice); border-left: 5px solid var(--blue); padding: 14px 18px; border-radius: 6px; margin: 14px 0; }
+
+/* about */
+.about { display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: start; }
+.avatar {
+  width: 120px; height: 120px; border-radius: 50%; background: var(--navy);
+  display: grid; place-items: center; color: var(--bulb); font-size: 42px; font-weight: bold;
+  border: 4px solid var(--blue);
+}
+.socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; padding: 0; list-style: none; }
+.socials a {
+  display: inline-block; padding: 8px 14px; border-radius: 6px; background: var(--navy);
+  color: #fff; text-decoration: none; font-size: 14px;
+}
+.socials a:hover { background: var(--blue); }
+
+footer { background: var(--navy); color: var(--sky); text-align: center; padding: 26px 16px; font-size: 14px; }
+footer a { color: #fff; }
+
+@media (max-width: 560px) {
+  .about { grid-template-columns: 1fr; }
+  .avatar { width: 90px; height: 90px; font-size: 32px; }
+  .marquee { padding: 20px 18px; }
+  h2 { font-size: 24px; }
+}
