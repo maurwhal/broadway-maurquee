@@ -7,351 +7,55 @@
   <meta name="description" content="Maur's guide to seeing Broadway on a budget: lotteries, rush, memberships, and the sites I actually use.">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="top" class="home">
 
-<nav class="top">
-  <div class="wrap">
-    <a class="brand" href="#home">Broadway <span>Maur</span>quee</a>
-    <a class="link" href="#about">About</a>
-    <a class="link" href="#guide">Budget Guide</a>
-    <a class="link" href="#sites">Sites &amp; Apps</a>
-    <a class="link" href="#code">Code</a>
+<!-- ================= THE SIGN ================= -->
+<header class="hero">
+  <div class="marquee big">
+    <h1>Broadway<br><span class="maur">Maur</span>quee</h1>
   </div>
-</nav>
-
-<!-- ================= HOME ================= -->
-<header class="hero" id="home">
-  <div class="marquee">
-    <p>now playing</p>
-    <h1>Broadway <span class="maur">Maur</span>quee</h1>
-    <p>Broadway on a budget</p>
-  </div>
-  <p class="tag">Cheap seats, lotteries, rush, and the sites I actually use. No markups, no scams.</p>
 </header>
-
-<div class="jump">
-  <a href="#about"><strong>About me</strong><span>Who I am + where to find me</span></a>
-  <a href="#guide"><strong>Maur's Guide to Broadway on a Budget</strong><span>Lotteries, rush, memberships, tips</span></a>
-  <a href="#sites"><strong>Recommended Sites &amp; Apps</strong><span>Where I check prices, seats, and reviews</span></a>
-  <a href="#code"><strong>Code &amp; Scripts</strong><span>Tools I'm building to track Broadway</span></a>
-</div>
 
 <main>
 
-<!-- ================= ABOUT ================= -->
-<section id="about">
-  <h2>About me</h2>
-  <div class="about">
-    <div class="avatar" aria-hidden="true">M</div>
-    <div>
-      <!-- TODO: rewrite this in your own words -->
-      <p>Hi, I'm Maur! I see a lot of Broadway and I almost never pay full price. This site is everything I've figured out about lotteries, rush, and discount programs, all in one place.</p>
-      <p>It's also my fun coding project. I'm building it (with some AI help) to get better at coding.</p>
-      <ul class="socials">
-        <!-- TODO: swap in your real profile links -->
-        <li><a href="https://www.instagram.com/broadwaymaurquee/">Instagram @broadwaymaurquee</a></li>
-        <li><a href="https://www.tiktok.com/@broadwaymaurquee">TikTok @broadwaymaurquee</a></li>
-        <li><a href="https://github.com/maurwhal">GitHub @maurwhal</a></li>
-      </ul>
-    </div>
-  </div>
+<!-- ================= INTRO ================= -->
+<section class="intro">
+  <p class="tagline">Cheap seats, lotteries, rush, and the sites I actually use.<br>No markups, no scams.</p>
+  <p>I'm known for my love of many things... my guinea pigs, Agatha Christie books, off-screen drama surrounding reality TV, and live theatre. However, of these, only my passion for Broadway results in numerous friends and family randomly texting me for advice.</p>
+  <p>Over the summer, I put together a resource document, which is the main bones of what you see here. I've been challenging myself to work on my coding skills more, and to use tools and programs to enhance my work, and here we are!!</p>
 </section>
 
-<!-- ================= GUIDE ================= -->
-<section id="guide">
-  <h2>Maur's Guide to Broadway on a Budget</h2>
-  <p class="lede">Most of these are free to enter. Lotteries and rush are usually capped at 2 tickets.</p>
-  <ul class="toc">
-    <li><a href="#cheat-sheet">Price cheat sheet</a></li>
-    <li><a href="#lotteries">Lotteries</a></li>
-    <li><a href="#rush">Digital rush</a></li>
-    <li><a href="#apps">Apps</a></li>
-    <li><a href="#in-person">In person</a></li>
-    <li><a href="#free-memberships">Free memberships</a></li>
-    <li><a href="#paid-memberships">Paid memberships</a></li>
-    <li><a href="#tips">Tips &amp; warnings</a></li>
-  </ul>
-
-  <h3 id="cheat-sheet">Price cheat sheet</h3>
-  <div class="table-wrap">
-    <table class="prices">
-      <thead><tr><th>Option</th><th>Typical price</th><th>Who / how many</th><th>Cost to join</th></tr></thead>
-      <tbody>
-        <tr><td>Digital lottery (Lucky Seat, Telecharge, Broadway Direct)</td><td class="price">$35 – $59</td><td>Anyone, max 2</td><td class="num">Free</td></tr>
-        <tr><td>Telecharge digital rush</td><td class="price">$40 – $49</td><td>Anyone, max 2</td><td class="num">Free</td></tr>
-        <tr><td>HipTix (Roundabout)</td><td class="price">$30</td><td>Ages 18–40</td><td class="num">Free</td></tr>
-        <tr><td>MTC35 (Manhattan Theatre Club)</td><td class="price">$35</td><td>Ages 35 and under</td><td class="num">Free</td></tr>
-        <tr><td>LincTix (Lincoln Center Theater)</td><td class="price">$35 – $40.50</td><td>Ages 18–35</td><td class="num">Free</td></tr>
-        <tr><td>TDF membership</td><td class="price">$53.50 – $62.50</td><td>Must qualify, up to 9</td><td class="num">$42/yr</td></tr>
-        <tr><td>TKTS booth</td><td class="price">varies</td><td>Anyone, good for groups of 3+</td><td class="num">Free</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="fine">Prices are from my screenshots in fall 2026 and change by show. Lottery/rush prices usually include a fee.</p>
-
-  <h3 id="lotteries">Lotteries <span class="pill">free, online</span></h3>
-  <div class="cards">
-    <div class="card">
-      <h4>Lucky Seat</h4>
-      <p class="meta">Easiest one to enter</p>
-      <ul>
-        <li>You can enter for a week or more at a time.</li>
-        <li>Also has cities other than NYC.</li>
-      </ul>
-      <details class="shot"><summary>See the events page</summary><img src="images/luckyseat-events.jpg" alt="Lucky Seat events in New York City with per-ticket prices from $24 to $61" loading="lazy"></details>
-      <details class="shot"><summary>See an entry form</summary><img src="images/luckyseat-entry.jpg" alt="Lucky Seat entry for Paranormal Activity, $40 per ticket, with a list of performances to select" loading="lazy"></details>
-    </div>
-
-    <div class="card">
-      <h4>Telecharge</h4>
-      <p class="meta">Two drawings a day: <span class="num">10:00 AM</span> and <span class="num">3:00 PM</span></p>
-      <ul>
-        <li>Enter before <span class="num">10:00 AM</span> and you're in both drawings.</li>
-        <li>Broadway: enter the day before the show. Off-Broadway: two days before.</li>
-        <li>If you win one show, you're removed from competing shows at the same date/time. So if you really want a specific show, don't enter the others. (Winning Operation Mincemeat would knock you out of the Oh, Mary! pool for that slot.)</li>
-      </ul>
-      <details class="shot"><summary>See the lottery page</summary><img src="images/telecharge-lottery.jpg" alt="Telecharge lottery page with shows like Just in Time, Operation Mincemeat, and Oh, Mary! from $45 to $59" loading="lazy"></details>
-    </div>
-
-    <div class="card">
-      <h4>Broadway Direct</h4>
-      <p class="meta">Least friendly lottery in my opinion</p>
-      <ul>
-        <li>Each show is its own page and you re-type your info every time.</li>
-        <li>Opens at different times in the morning the day before, closes at <span class="num">3:00 PM</span>.</li>
-        <li>Has a stand-by: if you entered and winners don't buy, you might still get tickets after <span class="num">3:00 PM</span>.</li>
-      </ul>
-      <details class="shot"><summary>See the lottery page</summary><img src="images/broadwaydirect-lottery.jpg" alt="Broadway Direct lottery list with Aladdin, MJ, Six, Wicked and more, $35 to $55" loading="lazy"></details>
-    </div>
-
-    <div class="card">
-      <h4>Show-specific apps</h4>
-      <ul>
-        <li><strong>Hamilton</strong> has its own app. You can enter for two weeks at a time.</li>
-        <li><strong>TodayTix</strong> runs some lotteries too, like the Friday Forty for Harry Potter and the Cursed Child, plus a few daily ones.</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3 id="rush">Same-day digital rush <span class="pill">free, online</span></h3>
-  <div class="cards">
-    <div class="card">
-      <h4>Telecharge Rush</h4>
-      <p class="meta"><a href="https://rush.telecharge.com/">rush.telecharge.com</a></p>
-      <ul>
-        <li>Max 2 tickets. Usually opens at <span class="num">11:00 AM</span> and refreshes every 2 minutes. Nothing at 11:00? Try <span class="num">11:02</span>, <span class="num">11:04</span>, etc.</li>
-        <li>Closes 30 minutes before showtime but can sell out way sooner. Popular shows usually go at <span class="num">11:00</span>.</li>
-        <li>Seats could be partial view or not together.</li>
-        <li>Sign up with LinkedIn, Facebook, X, or email.</li>
-        <li>You can only rush every 3 days. Buy Sunday, next rush is Wednesday.</li>
-      </ul>
-      <details class="shot"><summary>See the rush page</summary><img src="images/telecharge-rush.jpg" alt="Telecharge rush page with shows like The Great Gatsby, Heathers, and Spelling Bee, mostly $49" loading="lazy"></details>
-    </div>
-  </div>
-
-  <h3 id="apps">Apps</h3>
-  <div class="cards">
-    <div class="card">
-      <h4>TodayTix</h4>
-      <ul>
-        <li>Filter by "Lottery &amp; Rush".</li>
-        <li>You can set reminders to enter.</li>
-        <li>Rush usually goes live at <span class="num">9:00 AM</span>. Retry every 5 minutes (<span class="num">9:05</span>, <span class="num">9:10</span>...).</li>
-        <li>Lots of Off-Broadway shows too.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h4>Theatr <span class="pill">resale</span></h4>
-      <ul>
-        <li>Started as an Instagram account helping people resell last-minute tickets, now it's an app.</li>
-        <li>No upcharging allowed. Everything is face value or less.</li>
-        <li>Tickets go fast (about 40% are gone in 10 minutes), so check often if your dates are flexible.</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3 id="in-person">In person</h3>
-  <div class="cards">
-    <div class="card">
-      <h4>In-person rush</h4>
-      <ul>
-        <li>Popular shows can have a line before the box office opens, and there's a set number of rush seats.</li>
-        <li>You can also pop into the box office close to showtime for a discount (technically that's usually rush too).</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h4>TKTS booth</h4>
-      <ul>
-        <li>Same-day tickets. Best for groups of 3+. I'd personally try the other options first, but it's not a bad deal.</li>
-        <li>Check what's available: <a href="https://www.tdf.org/discount-ticket-programs/tkts-by-tdf/tkts-live/">TKTS Live</a>.</li>
-        <li>I've heard the Lincoln Center booth has a way shorter line than Times Square.</li>
-        <li>Very rare for popular shows to be there.</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3 id="free-memberships">Free memberships</h3>
-  <div class="cards">
-    <div class="card">
-      <h4>LincTix <span class="pill">ages 18–35</span></h4>
-      <ul>
-        <li><span class="num">$35–$40.50</span> tickets to every Lincoln Center Theater production, including their Broadway shows.</li>
-        <li><span class="num">$40.50</span> online (includes Telecharge + facility fee), <span class="num">$37</span> at the box office.</li>
-        <li>Book on the LincTix site. Tickets go on sale at a set time.</li>
-      </ul>
-      <p><a href="https://www.lct.org/linctix/">lct.org/linctix</a></p>
-    </div>
-    <div class="card">
-      <h4>HipTix <span class="pill">ages 18–40</span></h4>
-      <ul>
-        <li>Roundabout's program. <span class="num">$30</span> tickets to all Roundabout shows.</li>
-        <li>Uses the Criterion app.</li>
-      </ul>
-      <p><a href="https://www.roundabouttheatre.org/shows/hiptix/">roundabouttheatre.org/hiptix</a></p>
-    </div>
-    <div class="card">
-      <h4>MTC35 <span class="pill">ages 35 and under</span></h4>
-      <ul>
-        <li><span class="num">$35</span> tickets to every Manhattan Theatre Club show, plus member post-show parties.</li>
-        <li>I think you use a code on Telecharge and pick up at the box office with ID.</li>
-      </ul>
-      <p><a href="https://www.manhattantheatreclub.com/_old-join/mtc35/">manhattantheatreclub.com/mtc35</a></p>
-    </div>
-    <div class="card">
-      <h4>Audience Rewards <span class="pill">anyone</span></h4>
-      <ul>
-        <li>Basically frequent flyer miles for theatre. Covers all 41 Broadway theaters plus some off-Broadway, cabarets, and the Met Opera.</li>
-        <li>Enter your number at checkout to earn ShowPoints. Use them on tickets, meet and greets, Q&amp;As, or restaurant gift cards.</li>
-        <li>Sign up before your next purchase so you don't miss points.</li>
-      </ul>
-      <p><a href="https://www.audiencerewards.com/how-it-works">How it works</a></p>
-    </div>
-  </div>
-
-  <h3 id="paid-memberships">Paid memberships</h3>
-  <div class="cards">
-    <div class="card">
-      <h4>TDF <span class="pill"><span class="num">$42</span>/year</span></h4>
-      <p class="meta">You have to qualify (students, teachers, union members, etc.) and recertify every 4 years.</p>
-      <ul>
-        <li>Broadway tickets <span class="num">$53.50–$62.50</span>. Off-Broadway from <span class="num">$11</span>.</li>
-        <li>Buy up to 4 weeks ahead, for up to 9 people.</li>
-      </ul>
-      <p><a href="https://www.tdf.org/discount-ticket-programs/tdf-membership/tdf-membership-qualifications/">Check if you qualify</a></p>
-    </div>
-  </div>
-
-  <h3 id="tips">Tips &amp; warnings</h3>
-  <div class="warn">
-    <h4>Never buy from unofficial websites!</h4>
-    <p>You're usually paying a markup, and some are straight-up scams that never send tickets. They look polished, but they make their money off your extra fees. Watch out for "Sponsored" results when you search.</p>
-    <details class="shot"><summary>See what the ads look like</summary><img src="images/unofficial-sellers.jpg" alt="Search results for 'buy broadway tickets' showing sponsored resellers at the top" loading="lazy"></details>
-  </div>
-  <div class="warn">
-    <h4>Broadway.com = real tickets, huge markup</h4>
-    <p>Avoid. People on Reddit have reported service fees close to 40%.</p>
-    <details class="shot"><summary>See the Reddit post</summary><img src="images/broadwaycom-markup.jpg" alt="Reddit post about a 38.75% Broadway.com service fee" loading="lazy"></details>
-  </div>
-  <div class="warn">
-    <h4>Be careful with social media resale</h4>
-    <p>Facebook groups, Craigslist, and similar sites are where most scams and over-face-value listings happen. Only buy resale through a platform with buyer protection, like Theatr.</p>
-  </div>
-  <div class="tip">
-    <h4>Previews are usually cheaper</h4>
-    <p>There might be tech issues or changes. I saw a show in previews and again after opening, and they'd cut a scene. Kind of cool to see them figuring out what worked.</p>
-  </div>
-  <div class="tip">
-    <h4>Double-check discount codes</h4>
-    <p>Codes from mailers or Reddit can be expired or limited. Test it on the official site, and don't enter payment info on a site you didn't expect to land on.</p>
-  </div>
+<!-- ================= BUBBLES ================= -->
+<section class="bubbles" aria-label="Pages">
+  <a class="bubble" href="about.html">
+    <strong>About Me</strong>
+    <span>Favorite shows, stories, and my 41 theatre challenge</span>
+  </a>
+  <a class="bubble" href="guide.html">
+    <strong>Guide to Broadway on a Budget</strong>
+    <span>Lotteries, rush, apps, and memberships</span>
+  </a>
+  <a class="bubble" href="sites.html">
+    <strong>Maur Approved Websites &amp; Apps</strong>
+    <span>Where I check shows, seats, and reviews</span>
+  </a>
+  <a class="bubble" href="code.html">
+    <strong>Code for Broadway Tracking</strong>
+    <span>Build your own Broadway tracker</span>
+  </a>
 </section>
 
-<!-- ================= SITES ================= -->
-<section id="sites">
-  <h2>Recommended Sites &amp; Apps</h2>
-  <p class="lede">Where I check what's playing, what's discounted, and whether a seat is any good.</p>
-  <div class="cards">
-    <div class="card">
-      <h4><a href="https://bwayrush.com/">B'way Rush</a></h4>
-      <ul>
-        <li>Great summary of what's playing and every discount option for each show.</li>
-        <li>Also lists upcoming shows and closing dates (usually only about a month out).</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h4><a href="https://playbill.com/shows/broadway">Playbill</a></h4>
-      <ul>
-        <li>All current Broadway shows with details and links to official ticket sellers.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h4><a href="https://www.reddit.com/r/Broadway/">r/Broadway</a></h4>
-      <ul>
-        <li>Usually has a pinned discount megathread with codes from mailers.</li>
-      </ul>
-      <details class="shot"><summary>See the megathread</summary><img src="images/reddit-discount-thread.jpg" alt="r/Broadway Discount Megathread for Q4 2026 with codes and lottery info" loading="lazy"></details>
-    </div>
-    <div class="card">
-      <h4><a href="https://aviewfrommyseat.com/theater/">A View From My Seat</a></h4>
-      <ul>
-        <li>People post a photo of the stage from their seat with section, row, and seat number, plus a 1–5 rating and notes (partial view, legroom, aisle).</li>
-        <li>Best for long-running shows like Hamilton, The Lion King, Wicked.</li>
-        <li>Harder for new shows. A seat that was fine for Dear Evan Hansen at the Music Box could be partial view for Inter Alia (opened 11/11/2026).</li>
-      </ul>
-      <details class="shot"><summary>See some of my seat photos</summary><img src="images/aviewfrommyseat.jpg" alt="A View From My Seat photos from the Broadhurst, Music Box, Studio 54, and Longacre theatres" loading="lazy"></details>
-    </div>
-    <div class="card">
-      <h4><a href="https://didtheylikeit.com/broadway/">Did They Like It?</a></h4>
-      <ul>
-        <li>Critic reviews summed up as thumbs up / on the fence / thumbs down after a show opens.</li>
-        <li>Their staff assign the ratings, so a critic may not have literally said "thumbs down."</li>
-        <li>Links to reviews and the official ticket site.</li>
-      </ul>
-      <details class="shot"><summary>See the review tally</summary><img src="images/didtheylikeit.jpg" alt="Did They Like It? review tallies for Wanted, A Few Good Men, The Imaginary Invalid, 860, and Other Desert Cities" loading="lazy"></details>
-    </div>
-    <div class="card">
-      <h4><a href="https://www.show-score.com/">Show-Score</a></h4>
-      <ul>
-        <li>Kind of like Rotten Tomatoes for theatre. A little inflated in my opinion.</li>
-      </ul>
-      <details class="shot"><summary>See the scores</summary><img src="images/showscore.jpg" alt="Show-Score grid of shows with scores from 72 to 90" loading="lazy"></details>
-    </div>
-    <div class="card">
-      <h4>Apps I use</h4>
-      <ul>
-        <li><strong>TodayTix</strong>: lottery, rush, reminders</li>
-        <li><strong>Lucky Seat</strong>: easiest lottery</li>
-        <li><strong>Theatr</strong>: face-value resale</li>
-        <li><strong>Hamilton</strong>: its own lottery app</li>
-        <li><strong>Criterion</strong>: for HipTix</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CODE ================= -->
-<section id="code">
-  <h2>Code &amp; Scripts</h2>
-  <p class="lede">Tools I'm building to keep track of Broadway. Work in progress!</p>
-  <div class="cards">
-    <div class="card">
-      <h4>Broadway Show Tracker <span class="pill">updating</span></h4>
-      <p>Scripts for tracking shows on Broadway. Getting a refresh soon.</p>
-      <p><a href="https://github.com/maurwhal/Broadway-Show-Tracker">View on GitHub</a></p>
-    </div>
-    <div class="card">
-      <h4>This website</h4>
-      <p>Plain HTML and CSS, hosted free on GitHub Pages. Built as a learn-to-code project with AI help.</p>
-    </div>
-  </div>
-</section>
+<ul class="socials center">
+  <li><a href="https://www.instagram.com/broadwaymaurquee/">Instagram @broadwaymaurquee</a></li>
+  <li><a href="https://github.com/maurwhal">GitHub @maurwhal</a></li>
+</ul>
 
 </main>
 
 <footer>
-  <p>Broadway Maurquee &middot; always buy from official sources &middot; <a href="#home">back to top</a></p>
-  <p class="fine" style="color:var(--sky)">Prices and rules change all the time. Last checked November 2026.</p>
-  <p class="fine" style="color:var(--sky)">All content sourced and written by maurwhal. AI-assisted tools helped refine and generate some of the site's code. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
+  <p>Broadway Maurquee &middot; always buy from official sources</p>
+  <p class="fine">Prices and rules change all the time. Last checked November 2026.</p>
+  <p class="fine">All content sourced and written by maurwhal. AI-assisted tools helped refine and generate some of the site's code. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
 </footer>
 
 </body>
