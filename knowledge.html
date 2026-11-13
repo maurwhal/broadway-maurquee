@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Broadway Knowledge Quiz &middot; Broadway Maurquee</title>
+  <meta name="description" content="How well do you know Broadway? Theatres, name changes, record-breakers, and Tony trivia.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Broadway <span>Maur</span>quee</a>
+    <a class="link" href="index.html">Home</a>
+    <a class="link" href="about.html">About Me</a>
+    <a class="link" href="quiz.html">Buying Tickets Quiz</a>
+    <a class="link" href="guide.html">Affordable Tickets Guide</a>
+    <a class="link" href="sites.html">Websites &amp; Apps</a>
+    <a class="link active" href="battle.html">Broadway Battle!!</a>
+    <a class="link" href="code.html">Maur's Code</a>
+  </div>
+</nav>
+
+<main class="subpage">
+<section class="quiz">
+  <h2>Broadway Knowledge Quiz</h2>
+  <p class="lede">Pick an answer to see if you got it. No pressure, it's just for fun!</p>
+  <div id="trivia"></div>
+  <div class="satisfied" id="final" hidden>
+    <h3>You got <span id="final-score"></span>!</h3>
+    <div class="choices">
+      <a class="choice" href="battle.html">Back to Broadway Battle</a>
+      <button class="choice" id="retry" type="button">Try again</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="footer-sign"><span class="lights" aria-hidden="true"></span><strong>Broadway <span class="maur">Maur</span>quee</strong><span class="lights right" aria-hidden="true"></span></p>
+  <p class="fine">Prices and rules change all the time. Last checked November 2026.</p>
+  <p class="fine">All content sourced and written by maurwhal/broadwaymaurquee. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
+</footer>
+
+<script>
+/* answer = the index of the right option (0 = first) */
+const QUESTIONS = [
+  { q: "How many Broadway theatres are there?",
+    options: ["36", "39", "41", "44"], answer: 2,
+    why: `There are <strong>41</strong>. To count, a theatre needs 500+ seats and has to be in Manhattan's Theatre District (or be the Vivian Beaumont at Lincoln Center).` },
+
+  { q: "What is the largest Broadway theatre?",
+    options: ["Majestic", "Gershwin", "St. James", "Minskoff"], answer: 1,
+    why: `The <strong>Gershwin</strong>, with about 1,933 seats. It's been home to <em>Wicked</em> since October 2003.` },
+
+  { q: "What is the smallest Broadway theatre?",
+    options: ["Lyceum", "Booth", "Hayes", "Circle in the Square"], answer: 2,
+    why: `The <strong>Hayes</strong>, with 597 seats. As of November 2026 it's playing <em>The Fantasticks</em>, on Broadway for the first time.` },
+
+  { q: "How many Broadway theatres are run by nonprofit organizations?",
+    options: ["2", "4", "6", "10"], answer: 2,
+    why: `<strong>6</strong>:<ul>
+      <li>Roundabout Theatre Company: Todd Haimes, Studio 54, Stephen Sondheim</li>
+      <li>Manhattan Theatre Club: Samuel J. Friedman</li>
+      <li>Lincoln Center Theater: Vivian Beaumont</li>
+      <li>Second Stage: Hayes</li></ul>
+      Nonprofits have great cheap-ticket programs! Sign up if you're eligible:
+      <a href="https://www.roundabouttheatre.org/shows/hiptix/">HipTix</a> (18–40),
+      <a href="https://www.manhattantheatreclub.com/_old-join/mtc35/">MTC35</a> (35 and under),
+      <a href="https://www.lct.org/linctix/">LincTix</a> (18–35).` },
+
+  { q: "How many Broadway theatres are actually on Broadway (the street)?",
+    options: ["0", "2", "5", "10"], answer: 1,
+    why: `Only <strong>2</strong>: the <strong>Broadway Theatre</strong> and the <strong>Winter Garden</strong>. Every other "Broadway" theatre is on a side street.` },
+
+  { q: "Which of these is NOT a real former name of a Broadway theatre?",
+    options: ["Cort Theatre", "Brooks Atkinson Theatre", "Manhattan Grand Theatre", "Royale Theatre"], answer: 2,
+    why: `There was never a <strong>Manhattan Grand Theatre</strong>. The rest are real, and lots of theatres have changed names:<ul>
+      <li>Cort → James Earl Jones (2022)</li>
+      <li>Brooks Atkinson → Lena Horne (2022)</li>
+      <li>Royale → Bernard B. Jacobs (2005)</li>
+      <li>Plymouth → Gerald Schoenfeld (2005)</li>
+      <li>Virginia → August Wilson (2005)</li>
+      <li>Biltmore → Samuel J. Friedman (2008)</li>
+      <li>Henry Miller's → Stephen Sondheim (2010)</li>
+      <li>Ford Center → Hilton → Foxwoods → Lyric (2014)</li>
+      <li>American Airlines → Todd Haimes (2023)</li>
+      <li>Martin Beck → Al Hirschfeld (2003)</li>
+      <li>Alvin → Neil Simon (1983)</li>
+      <li>Uris → Gershwin (1983)</li>
+      <li>Ritz → Walter Kerr (1990)</li>
+      <li>Helen Hayes → Hayes (2018)</li></ul>` },
+
+  { q: "Audra McDonald is the only person to win a Tony in all four acting categories. Which show did she NOT win a Tony for?",
+    options: ["Carousel", "Ragtime", "Porgy and Bess", "Gypsy"], answer: 3,
+    why: `<strong>Gypsy</strong>. She was nominated in 2025 but lost to Nicole Scherzinger (<em>Sunset Blvd.</em>). Her six wins, the most of any performer:
+      <em>Carousel</em> (1994), <em>Master Class</em> (1996), <em>Ragtime</em> (1998), <em>A Raisin in the Sun</em> (2004),
+      <em>Porgy and Bess</em> (2012), and <em>Lady Day at Emerson's Bar and Grill</em> (2014).` },
+
+  { q: "Which show holds the record for most Broadway performances ever?",
+    options: ["Chicago", "The Phantom of the Opera", "The Lion King", "Cats"], answer: 1,
+    why: `<strong>The Phantom of the Opera</strong>, with 13,981 performances from 1988 to 2023. <em>Chicago</em> is the longest-running show still open.` },
+
+  { q: "How many performances does a typical Broadway show do in a week?",
+    options: ["5", "6", "8", "10"], answer: 2,
+    why: `<strong>8</strong>. Usually with two matinees, and most theatres are dark (closed) one day a week, often Monday.` }
+];
+
+const box = document.getElementById("trivia");
+let answered = 0, right = 0;
+
+function render() {
+  answered = 0; right = 0;
+  document.getElementById("final").hidden = true;
+  box.innerHTML = QUESTIONS.map((item, qi) => `
+    <div class="card trivia-q" data-q="${qi}">
+      <h4>${qi + 1}. ${item.q}</h4>
+      <div class="choices">${item.options.map((o, oi) =>
+        `<button class="choice" type="button" data-o="${oi}">${o}</button>`).join("")}</div>
+      <div class="why" hidden></div>
+    </div>`).join("");
+}
+
+box.addEventListener("click", e => {
+  const btn = e.target.closest("button[data-o]");
+  if (!btn) return;
+  const card = btn.closest(".trivia-q");
+  if (card.classList.contains("done")) return;
+  const item = QUESTIONS[+card.dataset.q];
+  const pick = +btn.dataset.o;
+  card.classList.add("done");
+  card.querySelectorAll("button[data-o]").forEach(b => {
+    b.disabled = true;
+    if (+b.dataset.o === item.answer) b.classList.add("right");
+  });
+  if (pick !== item.answer) btn.classList.add("wrong"); else right++;
+  const why = card.querySelector(".why");
+  why.innerHTML = `<p><strong>${pick === item.answer ? "Correct!" : "Not quite."}</strong> ${item.why}</p>`;
+  why.hidden = false;
+  if (++answered === QUESTIONS.length) {
+    document.getElementById("final-score").textContent = `${right} of ${QUESTIONS.length}`;
+    document.getElementById("final").hidden = false;
+  }
+});
+document.getElementById("retry").addEventListener("click", () => { render(); scrollTo(0, 0); });
+render();
+</script>
+</body>
+</html>

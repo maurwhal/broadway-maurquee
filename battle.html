@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Broadway Battle &middot; Broadway Maurquee</title>
+  <meta name="description" content="Broadway Battle: longest-running shows, Broadway theatres, Tony winners, and more. See how you stack up against Maur.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Broadway <span>Maur</span>quee</a>
+    <a class="link" href="index.html">Home</a>
+    <a class="link" href="about.html">About Me</a>
+    <a class="link" href="quiz.html">Buying Tickets Quiz</a>
+    <a class="link" href="guide.html">Affordable Tickets Guide</a>
+    <a class="link" href="sites.html">Websites &amp; Apps</a>
+    <a class="link active" href="battle.html">Broadway Battle!!</a>
+    <a class="link" href="code.html">Maur's Code</a>
+  </div>
+</nav>
+
+<main class="subpage">
+<section id="battle">
+  <h2>Broadway Battle!!</h2>
+  <p class="lede">How do you stack up against Maur? Check off what you've done and see your score.</p>
+  <p class="center-row"><a class="mini-marquee" href="knowledge.html">Try the Broadway Knowledge Quiz &rarr;</a></p>
+
+  <!-- ===== Q1 ===== -->
+  <h3>1. How many of the top 10 longest-running Broadway shows have you seen on Broadway?</h3>
+  <p class="fine">Ranked by number of performances. Information as of <strong class="today"></strong>.
+    Shows still running update every day; their performance counts are estimates (about 8 a week).</p>
+  <p class="bulk"><button type="button" class="linkbtn" data-all="longest">Select all</button> &middot;
+    <button type="button" class="linkbtn" data-none="longest">Clear</button></p>
+  <div class="table-wrap">
+    <table class="prices battle-table">
+      <thead><tr><th>Seen?</th><th>#</th><th>Show</th><th>Run</th><th>Performances</th></tr></thead>
+      <tbody id="longest"></tbody>
+    </table>
+  </div>
+  <div class="scoreboard">
+    <div class="score-you">You: <strong id="score-longest">0</strong> of 10</div>
+    <div class="score-maur" data-q="longest"></div>
+  </div>
+
+  <!-- ===== Q2 ===== -->
+  <h3>2. How many of the 41 Broadway theatres have you been to?</h3>
+  <p>To count as a Broadway theatre, a venue needs 500 or more seats and has to be in Manhattan's Theatre District
+    (the one exception is the Vivian Beaumont at Lincoln Center). There are 41 official Broadway theatres.</p>
+  <p class="bulk"><button type="button" class="linkbtn" data-all="theatres">Select all</button> &middot;
+    <button type="button" class="linkbtn" data-none="theatres">Clear</button></p>
+  <div class="check-grid" id="theatres"></div>
+  <div class="scoreboard">
+    <div class="score-you">You: <strong id="score-theatres">0</strong> of 41</div>
+    <div class="score-maur" data-q="theatres"></div>
+  </div>
+
+  <!-- ===== Q3 ===== -->
+  <h3>3. How many Broadway shows have you seen so far this year?</h3>
+  <p class="fine">Estimates are totally fine!</p>
+  <div class="choices year-count" id="this-year"></div>
+  <div class="scoreboard">
+    <div class="score-you">You: <strong id="score-this-year">pick one</strong></div>
+    <div class="score-maur" data-q="thisYear"></div>
+  </div>
+
+  <!-- ===== Q4 ===== -->
+  <h3>4. What is the most times you have seen the same show?</h3>
+  <div class="scoreboard">
+    <div class="score-you"><label for="most-times">You:</label>
+      <input id="most-times" class="num-input" type="number" min="0" max="999" inputmode="numeric" placeholder="0"> times</div>
+    <div class="score-maur" data-q="mostTimes"></div>
+  </div>
+
+  <!-- ===== Q5–8: Tony winners (built from TONYS below) ===== -->
+  <div id="tony-questions"></div>
+
+  <!-- ===== Q9–10: Tony-winning performances (built from PERFORMERS below) ===== -->
+  <div id="performer-questions"></div>
+
+  <!-- ===== Q11: special performances ===== -->
+  <h3>11. How many first previews, opening nights, and closing nights have you been to?</h3>
+  <div class="special-inputs">
+    <label>First previews <input id="sp-first" class="num-input special" type="number" min="0" max="999" inputmode="numeric" placeholder="0"></label>
+    <label>Opening nights <input id="sp-open" class="num-input special" type="number" min="0" max="999" inputmode="numeric" placeholder="0"></label>
+    <label>Closing nights <input id="sp-close" class="num-input special" type="number" min="0" max="999" inputmode="numeric" placeholder="0"></label>
+  </div>
+  <div class="scoreboard">
+    <div class="score-you">You: <strong id="score-special">0</strong> total</div>
+    <div class="score-maur" data-q="special"></div>
+  </div>
+
+  <!-- ===== Q12+: show checklists (built from SHOW_LISTS below) ===== -->
+  <div id="list-questions"></div>
+
+  <!-- ===== Q18: 2026–27 season, loaded live from Maur's Google Apps Script (hidden until connected) ===== -->
+  <div id="season-question" hidden>
+    <h3>18. How many shows from the 2026–27 Broadway season have you seen?</h3>
+    <p class="fine">Shows that have started performances this season (opening April 27, 2026 – April 2027). Updated automatically<span id="season-updated"></span>.</p>
+    <p class="bulk"><button type="button" class="linkbtn" data-all="season">Select all</button> &middot;
+      <button type="button" class="linkbtn" data-none="season">Clear</button></p>
+    <div class="check-grid tony-grid" id="season-list"></div>
+    <div class="scoreboard">
+      <div class="score-you">You: <strong id="score-season">0</strong> of <span id="season-total">0</span></div>
+      <div class="score-maur" data-q="season"></div>
+    </div>
+  </div>
+
+  <dialog id="picks-dialog" class="picks-dialog">
+    <form method="dialog"><button class="close-x" aria-label="Close">&times;</button></form>
+    <h3></h3>
+    <div class="table-wrap"></div>
+  </dialog>
+</section>
+</main>
+
+<footer>
+  <p class="footer-sign"><span class="lights" aria-hidden="true"></span><strong>Broadway <span class="maur">Maur</span>quee</strong><span class="lights right" aria-hidden="true"></span></p>
+  <p class="fine">Prices and rules change all the time. Last checked November 2026.</p>
+  <p class="fine">All content sourced and written by maurwhal/broadwaymaurquee. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
+</footer>
+
+<script>
+/* ---------- Maur's answers ----------
+   text = what shows after someone locks in. n = Maur's number, used to pick a winner (null = coming soon) */
+const MAUR = {
+  longest:   { n: 4,  text: "4 of 10 (The Lion King, Wicked, The Book of Mormon, Mamma Mia!)" },
+  theatres:  { n: 39, text: "39 of 41 (still need the Majestic and Ambassador!)" },
+  thisYear:  { n: 46, text: "46 (as of Nov 12, 2026)" },
+  mostTimes: { n: 11, text: "11 times (Wicked)" },
+  /* picks for the Tony show lists = the year(s) label of each show Maur checked */
+  tonyMusical: { n: 13, text: "13 of 26", picks: ["2004","2007","2011","2015","2016","2017","2018","2019","2021","2023","2024","2025","2026"] },
+  tonyMusicalRevival: { n: 4, text: "4 of 23 (Company, The King and I, The Color Purple, Oklahoma!)" },
+  tonyPlay:           { n: 1, text: "1 of 26 (Harry Potter and the Cursed Child)" },
+  /* picks = Maur's checked boxes as "year-column" (0 Actress, 1 Featured Actress, 2 Actor, 3 Featured Actor) */
+  perfMusical: { n: 20, text: "20 of 40", picks: [
+    "2016-1","2016-2","2016-3", "2017-1", "2018-0","2018-2","2018-3", "2019-0","2019-1","2019-2","2019-3",
+    "2021-2","2021-3", "2022-1","2022-3", "2023-0","2023-1","2023-2", "2026-1","2026-3"] },
+  perfPlay: { n: 2, text: "2 of 40 (Mary-Louise Parker in The Sound Inside, Jodie Comer in Prima Facie)" },
+  tonyPlayRevival:    { n: 0, text: "0 of 25 (I guess I have bad taste in plays lol)" },
+  special:  { n: 3, text: "3 (all first previews!)" },
+  jukebox:  { n: 4, text: "4 of 20 (Mamma Mia!, The Cher Show, Moulin Rouge!, & Juliet)" },
+  disney:   { n: 3, text: "3 of 9 (The Lion King, Aladdin, Frozen)" },
+  sondheim: { n: 1, text: "1 of 14 (Company)" },
+  alw:      { n: 2, text: "2 of 13 (Evita, School of Rock)" },
+  pulitzer: { n: 2, text: "2 of 10 (Rent, Hamilton)" },
+  season:   { n: 8, text: "8 so far, as of Nov 13, 2026 (The Imaginary Invalid, Paranormal Activity, School Girls, Now You See Me Live, A Few Good Men, Downstate, It's a Wonderful Life, Inter Alia)" },
+  movies:   { n: 7, text: "7 of 20 (Legally Blonde, Mean Girls, Beetlejuice, Some Like It Hot, Tootsie, Moulin Rouge!, Shrek the Musical)" }
+};
+
+/* ---------- 2026–27 season feed ----------
+   Paste the Apps Script web app URL here (ends in /exec). Leave "" and question 18 stays hidden.
+   The feed only has public show info (title, theatre, opening date). No keys or personal data. */
+const SEASON_URL = "https://script.google.com/macros/s/AKfycbzdmPnfRZ-FcY4rlS7Pjn9HjENikRiaLwE_j41S_InlYV0hPCdKzQGUPRnwZzgN3u2d/exec";
+
+/* ---------- show checklists ---------- */
+const SHOW_LISTS = [
+  { key: "jukebox", q: "How many of these jukebox musicals have you seen on Broadway?", items: [
+    "Mamma Mia!","Jersey Boys","Movin' Out","Million Dollar Quartet","American Idiot","Rock of Ages",
+    "Motown the Musical","Beautiful: The Carole King Musical","Summer: The Donna Summer Musical","Escape to Margaritaville",
+    "Head Over Heels","The Cher Show","Ain't Too Proud","Tina","Jagged Little Pill","Moulin Rouge!","MJ","& Juliet",
+    "A Beautiful Noise","Buena Vista Social Club"] },
+  { key: "disney", q: "How many Disney musicals have you seen on Broadway?", items: [
+    "Beauty and the Beast","The Lion King","Aida","Tarzan","Mary Poppins","The Little Mermaid","Newsies","Aladdin","Frozen"] },
+  { key: "sondheim", q: "How many Stephen Sondheim musicals have you seen (any production)?",
+    note: "Includes West Side Story and Gypsy, where he wrote the lyrics.", items: [
+    "West Side Story","Gypsy","A Funny Thing Happened on the Way to the Forum","Anyone Can Whistle","Company","Follies",
+    "A Little Night Music","Pacific Overtures","Sweeney Todd","Merrily We Roll Along","Sunday in the Park with George",
+    "Into the Woods","Assassins","Passion"] },
+  { key: "alw", q: "How many Andrew Lloyd Webber musicals have you seen (any production)?", items: [
+    "Joseph and the Amazing Technicolor Dreamcoat","Jesus Christ Superstar","Evita","Cats","Song and Dance",
+    "Starlight Express","The Phantom of the Opera","Aspects of Love","Sunset Boulevard","By Jeeves",
+    "The Woman in White","School of Rock","Bad Cinderella"] },
+  { key: "pulitzer", q: "How many Pulitzer Prize-winning musicals have you seen (any production)?",
+    note: "Only 10 musicals have won the Pulitzer Prize for Drama.", items: [
+    "Of Thee I Sing (1932)","South Pacific (1950)","Fiorello! (1960)","How to Succeed in Business Without Really Trying (1962)",
+    "A Chorus Line (1976)","Sunday in the Park with George (1985)","Rent (1996)","Next to Normal (2010)",
+    "Hamilton (2016)","A Strange Loop (2020)"] },
+  { key: "movies", q: "How many of these movie-to-musical adaptations have you seen on Broadway?", items: [
+    "The Producers","Hairspray","Legally Blonde","Kinky Boots","Mean Girls","Beetlejuice","Back to the Future",
+    "Some Like It Hot","Waitress","Tootsie","Moulin Rouge!","Billy Elliot","School of Rock","Pretty Woman",
+    "Mrs. Doubtfire","Groundhog Day","Shrek the Musical","Elf","Catch Me If You Can","The Notebook"] }
+];
+
+/* ---------- top 10 longest-running (checked Nov 2026) ----------
+   Closed shows: final count. Running shows: count on a known date, then about 8 shows a week. */
+const LONGEST = [
+  { show: "The Phantom of the Opera", open: "1988-01-26", close: "2023-04-16", perfs: 13981 },
+  { show: "Chicago (1996 revival)",   open: "1996-11-14", perfs: 11816, asOf: "2026-11-01" },
+  { show: "The Lion King",            open: "1997-11-13", perfs: 11441, asOf: "2026-11-01" },
+  { show: "Wicked",                   open: "2003-10-30", perfs: 8963,  asOf: "2026-10-18" },
+  { show: "Cats",                     open: "1982-10-07", close: "2000-09-10", perfs: 7485 },
+  { show: "Les Misérables",           open: "1987-03-12", close: "2003-05-18", perfs: 6680 },
+  { show: "A Chorus Line",            open: "1975-07-25", close: "1990-04-28", perfs: 6137 },
+  { show: "Oh! Calcutta! (revival)",  open: "1976-09-24", close: "1989-08-06", perfs: 5959 },
+  { show: "The Book of Mormon",       open: "2011-03-24", perfs: 5759,  asOf: "2026-09-25" },
+  { show: "Mamma Mia!",               open: "2001-10-18", close: "2015-09-12", perfs: 5758 }
+];
+
+/* ---------- the 41 Broadway theatres ---------- */
+const THEATRES = ["Al Hirschfeld","Ambassador","August Wilson","Belasco","Bernard B. Jacobs","Booth","Broadhurst",
+  "Broadway","Circle in the Square","Ethel Barrymore","Eugene O'Neill","Gerald Schoenfeld","Gershwin","Hayes","Hudson",
+  "Imperial","James Earl Jones","John Golden","Lena Horne","Longacre","Lunt-Fontanne","Lyceum","Lyric","Majestic",
+  "Marquis","Minskoff","Music Box","Nederlander","Neil Simon","New Amsterdam","Palace","Richard Rodgers","St. James",
+  "Samuel J. Friedman","Shubert","Stephen Sondheim","Studio 54","Todd Haimes","Vivian Beaumont","Walter Kerr","Winter Garden"];
+
+const THIS_YEAR = ["0–6", "7–12", "13–24", "25–51", "52+"];
+const THIS_YEAR_MAX = [6, 12, 24, 51, Infinity];   /* top of each range, used to place Maur's number */
+
+/* ---------- Tony winners, 2000–2026 (by ceremony year; no ceremony in 2020) ---------- */
+const TONYS = [
+  { key: "tonyMusical", title: "Best Musical", winners: [
+    [2000,"Contact"],[2001,"The Producers"],[2002,"Thoroughly Modern Millie"],[2003,"Hairspray"],[2004,"Avenue Q"],
+    [2005,"Monty Python's Spamalot"],[2006,"Jersey Boys"],[2007,"Spring Awakening"],[2008,"In the Heights"],
+    [2009,"Billy Elliot the Musical"],[2010,"Memphis"],[2011,"The Book of Mormon"],[2012,"Once"],[2013,"Kinky Boots"],
+    [2014,"A Gentleman's Guide to Love and Murder"],[2015,"Fun Home"],[2016,"Hamilton"],[2017,"Dear Evan Hansen"],
+    [2018,"The Band's Visit"],[2019,"Hadestown"],[2021,"Moulin Rouge! The Musical"],[2022,"A Strange Loop"],
+    [2023,"Kimberly Akimbo"],[2024,"The Outsiders"],[2025,"Maybe Happy Ending"],[2026,"Schmigadoon!"]] },
+  { key: "tonyMusicalRevival", title: "Best Revival of a Musical", note: "No award was given in 2021. Shows that won twice are listed once.", winners: [
+    [2000,"Kiss Me, Kate"],[2001,"42nd Street"],[2002,"Into the Woods"],[2003,"Nine"],[2004,"Assassins"],
+    ["2005, 2010","La Cage aux Folles"],[2006,"The Pajama Game"],["2007, 2022","Company"],[2008,"South Pacific"],[2009,"Hair"],
+    [2011,"Anything Goes"],[2012,"The Gershwins' Porgy and Bess"],[2013,"Pippin"],
+    [2014,"Hedwig and the Angry Inch"],[2015,"The King and I"],[2016,"The Color Purple"],[2017,"Hello, Dolly!"],
+    [2018,"Once on This Island"],[2019,"Oklahoma!"],[2023,"Parade"],
+    [2024,"Merrily We Roll Along"],[2025,"Sunset Blvd."],[2026,"Ragtime"]] },
+  { key: "tonyPlay", title: "Best Play", winners: [
+    [2000,"Copenhagen"],[2001,"Proof"],[2002,"The Goat, or Who Is Sylvia?"],[2003,"Take Me Out"],
+    [2004,"I Am My Own Wife"],[2005,"Doubt"],[2006,"The History Boys"],[2007,"The Coast of Utopia"],
+    [2008,"August: Osage County"],[2009,"God of Carnage"],[2010,"Red"],[2011,"War Horse"],[2012,"Clybourne Park"],
+    [2013,"Vanya and Sonia and Masha and Spike"],[2014,"All the Way"],
+    [2015,"The Curious Incident of the Dog in the Night-Time"],[2016,"The Humans"],[2017,"Oslo"],
+    [2018,"Harry Potter and the Cursed Child"],[2019,"The Ferryman"],[2021,"The Inheritance"],
+    [2022,"The Lehman Trilogy"],[2023,"Leopoldstadt"],[2024,"Stereophonic"],[2025,"Purpose"],[2026,"Liberation"]] },
+  { key: "tonyPlayRevival", title: "Best Revival of a Play", note: "Shows that won twice are listed once.", winners: [
+    [2000,"The Real Thing"],[2001,"One Flew Over the Cuckoo's Nest"],[2002,"Private Lives"],
+    [2003,"Long Day's Journey into Night"],[2004,"Henry IV"],[2005,"Glengarry Glen Ross"],[2006,"Awake and Sing!"],
+    [2007,"Journey's End"],[2008,"Boeing-Boeing"],[2009,"The Norman Conquests"],[2010,"Fences"],
+    [2011,"The Normal Heart"],["2012, 2026","Death of a Salesman"],[2013,"Who's Afraid of Virginia Woolf?"],
+    [2014,"A Raisin in the Sun"],[2015,"Skylight"],[2016,"A View from the Bridge"],[2017,"Jitney"],
+    [2018,"Angels in America"],[2019,"The Boys in the Band"],[2021,"A Soldier's Play"],[2022,"Take Me Out"],
+    [2023,"Topdog/Underdog"],[2024,"Appropriate"],[2025,"Eureka Day"]] }
+];
+
+/* ---------- Tony-winning performers, last 10 ceremonies (2016–2026, none in 2020) ----------
+   each row: year, then [name, show] for Lead Actress, Featured Actress, Lead Actor, Featured Actor */
+const PERFORMERS = [
+  { key: "perfMusical", title: "musical", rows: [
+    [2016, ["Cynthia Erivo","The Color Purple"], ["Renée Elise Goldsberry","Hamilton"], ["Leslie Odom Jr.","Hamilton"], ["Daveed Diggs","Hamilton"]],
+    [2017, ["Bette Midler","Hello, Dolly!"], ["Rachel Bay Jones","Dear Evan Hansen"], ["Ben Platt","Dear Evan Hansen"], ["Gavin Creel","Hello, Dolly!"]],
+    [2018, ["Katrina Lenk","The Band's Visit"], ["Lindsay Mendez","Carousel"], ["Tony Shalhoub","The Band's Visit"], ["Ari'el Stachel","The Band's Visit"]],
+    [2019, ["Stephanie J. Block","The Cher Show"], ["Ali Stroker","Oklahoma!"], ["Santino Fontana","Tootsie"], ["André De Shields","Hadestown"]],
+    [2021, ["Adrienne Warren","Tina"], ["Lauren Patten","Jagged Little Pill"], ["Aaron Tveit","Moulin Rouge!"], ["Danny Burstein","Moulin Rouge!"]],
+    [2022, ["Joaquina Kalukango","Paradise Square"], ["Patti LuPone","Company"], ["Myles Frost","MJ"], ["Matt Doyle","Company"]],
+    [2023, ["Victoria Clark","Kimberly Akimbo"], ["Bonnie Milligan","Kimberly Akimbo"], ["J. Harrison Ghee","Some Like It Hot"], ["Alex Newell","Shucked"]],
+    [2024, ["Maleah Joi Moon","Hell's Kitchen"], ["Kecia Lewis","Hell's Kitchen"], ["Jonathan Groff","Merrily We Roll Along"], ["Daniel Radcliffe","Merrily We Roll Along"]],
+    [2025, ["Nicole Scherzinger","Sunset Blvd."], ["Natalie Venetia Belcon","Buena Vista Social Club"], ["Darren Criss","Maybe Happy Ending"], ["Jak Malone","Operation Mincemeat"]],
+    [2026, ["Caissie Levy","Ragtime"], ["Shoshana Bean","The Lost Boys"], ["Joshua Henry","Ragtime"], ["Ali Louis Bourzgui","The Lost Boys"]]
+  ]},
+  { key: "perfPlay", title: "play", rows: [
+    [2016, ["Jessica Lange","Long Day's Journey into Night"], ["Jayne Houdyshell","The Humans"], ["Frank Langella","The Father"], ["Reed Birney","The Humans"]],
+    [2017, ["Laurie Metcalf","A Doll's House, Part 2"], ["Cynthia Nixon","The Little Foxes"], ["Kevin Kline","Present Laughter"], ["Michael Aronov","Oslo"]],
+    [2018, ["Glenda Jackson","Three Tall Women"], ["Laurie Metcalf","Three Tall Women"], ["Andrew Garfield","Angels in America"], ["Nathan Lane","Angels in America"]],
+    [2019, ["Elaine May","The Waverly Gallery"], ["Celia Keenan-Bolger","To Kill a Mockingbird"], ["Bryan Cranston","Network"], ["Bertie Carvel","Ink"]],
+    [2021, ["Mary-Louise Parker","The Sound Inside"], ["Lois Smith","The Inheritance"], ["Andrew Burnap","The Inheritance"], ["David Alan Grier","A Soldier's Play"]],
+    [2022, ["Deirdre O'Connell","Dana H."], ["Phylicia Rashad","Skeleton Crew"], ["Simon Russell Beale","The Lehman Trilogy"], ["Ruben Santiago-Hudson","Lackawanna Blues"]],
+    [2023, ["Jodie Comer","Prima Facie"], ["Miriam Silverman","The Sign in Sidney Brustein's Window"], ["Sean Hayes","Good Night, Oscar"], ["Brandon Uranowitz","Leopoldstadt"]],
+    [2024, ["Sarah Paulson","Appropriate"], ["Kara Young","Purlie Victorious"], ["Jeremy Strong","An Enemy of the People"], ["Will Brill","Stereophonic"]],
+    [2025, ["Sarah Snook","The Picture of Dorian Gray"], ["Kara Young","Purpose"], ["Cole Escola","Oh, Mary!"], ["Francis Jue","Yellow Face"]],
+    [2026, ["Lesley Manville","Oedipus"], ["Laurie Metcalf","Death of a Salesman"], ["John Lithgow","Giant"], ["Alden Ehrenreich","Becky Shaw"]]
+  ]}
+];
+
+/* ---------- helpers ---------- */
+const DAY = 86400000;
+const today = new Date();
+const fmt = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+const parse = s => new Date(s + "T12:00:00");
+function span(from, to) {
+  let years = to.getFullYear() - from.getFullYear();
+  const anniversary = new Date(from); anniversary.setFullYear(from.getFullYear() + years);
+  if (anniversary > to) { years--; anniversary.setFullYear(anniversary.getFullYear() - 1); }
+  return `${years} yrs, ${Math.floor((to - anniversary) / DAY)} days`;
+}
+/* remember answers in this browser only */
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem("battle-" + k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem("battle-" + k, JSON.stringify(v)); } catch (e) {} }
+};
+
+/* a checklist: boxes named by group, score shown in #score-<group>, saved under <group> */
+function checklist(group) {
+  const saved = new Set((store.get(group) || []).map(String));
+  const boxes = () => [...document.querySelectorAll(`input[data-group="${group}"]`)];
+  const update = () => {
+    const picked = boxes().filter(b => b.checked).map(b => b.value);
+    document.getElementById("score-" + group).textContent = picked.length;
+    store.set(group, picked);
+  };
+  return {
+    box: (value, label) => `<input type="checkbox" data-group="${group}" value="${value}" aria-label="${label}" ${saved.has(String(value)) ? "checked" : ""}>`,
+    wire() { boxes().forEach(b => b.addEventListener("change", update)); update(); },
+    setAll(on) { boxes().forEach(b => b.checked = on); update(); }
+  };
+}
+const lists = {};
+
+document.querySelectorAll(".today").forEach(el => el.textContent = fmt(today));
+
+/* ---------- Q1 table ---------- */
+lists.longest = checklist("longest");
+document.getElementById("longest").innerHTML = LONGEST.map((s, i) => {
+  const running = !s.close;
+  const end = running ? today : parse(s.close);
+  const perfs = running ? s.perfs + Math.max(0, Math.floor((today - parse(s.asOf)) / DAY / 7 * 8)) : s.perfs;
+  const run = running
+    ? `${fmt(parse(s.open))} – now<br><span class="pill">still running: ${span(parse(s.open), today)}</span>`
+    : `${fmt(parse(s.open))} – ${fmt(end)}<br><span class="fine">${span(parse(s.open), end)}</span>`;
+  return `<tr><td>${lists.longest.box(i, "I've seen " + s.show)}</td>
+    <td class="price">${i + 1}</td><td><strong>${s.show}</strong></td><td>${run}</td>
+    <td class="price">${running ? "≈ " : ""}${perfs.toLocaleString()}</td></tr>`;
+}).join("");
+lists.longest.wire();
+
+/* ---------- Q2 theatres ---------- */
+lists.theatres = checklist("theatres");
+document.getElementById("theatres").innerHTML = THEATRES.map(t =>
+  `<label>${lists.theatres.box(t, t)} ${t}</label>`).join("");
+lists.theatres.wire();
+
+/* ---------- Q3 shows this year ---------- */
+const yearBox = document.getElementById("this-year");
+yearBox.innerHTML = THIS_YEAR.map(o => `<button type="button" class="choice" data-pick="${o}">${o}</button>`).join("");
+function pickYear(o) {
+  yearBox.querySelectorAll(".choice").forEach(b => b.classList.toggle("picked", b.dataset.pick === o));
+  document.getElementById("score-this-year").textContent = o ? `${o} shows` : "pick one";
+  store.set("thisYear", o);
+}
+yearBox.addEventListener("click", e => { const b = e.target.closest("[data-pick]"); if (b) pickYear(b.dataset.pick); });
+pickYear(store.get("thisYear"));
+
+/* ---------- Q4 most times ---------- */
+const most = document.getElementById("most-times");
+most.value = store.get("mostTimes") ?? "";
+most.addEventListener("input", () => store.set("mostTimes", most.value));
+
+/* ---------- Q5–8 Tony winners ---------- */
+const tonyBox = document.getElementById("tony-questions");
+TONYS.forEach((cat, n) => {
+  lists[cat.key] = checklist(cat.key);
+  const total = cat.winners.length;
+  tonyBox.insertAdjacentHTML("beforeend", `
+    <h3>${n + 5}. How many ${cat.title} Tony winners (2000–2026) have you seen?</h3>
+    <p class="fine">Any production counts. ${cat.note || ""} There was no Tony ceremony in 2020; the 2021 awards covered the 2019–20 season.</p>
+    <p class="bulk"><button type="button" class="linkbtn" data-all="${cat.key}">Select all</button> &middot;
+      <button type="button" class="linkbtn" data-none="${cat.key}">Clear</button></p>
+    <div class="check-grid tony-grid">${cat.winners.map(([year, show]) =>
+      `<label>${lists[cat.key].box(year, "I've seen " + show)} <span class="num">${year}</span> ${show}</label>`).join("")}</div>
+    <div class="scoreboard">
+      <div class="score-you">You: <strong id="score-${cat.key}">0</strong> of ${total}</div>
+      <div class="score-maur" data-q="${cat.key}"></div>
+    </div>`);
+  lists[cat.key].wire();
+});
+
+/* ---------- Q9–10 Tony-winning performances ---------- */
+const perfBox = document.getElementById("performer-questions");
+PERFORMERS.forEach((cat, n) => {
+  lists[cat.key] = checklist(cat.key);
+  const total = cat.rows.length * 4;
+  const cell = (year, col, [name, show]) =>
+    `<td><label class="perf">${lists[cat.key].box(year + "-" + col, "I saw " + name + " in " + show)}
+      <span><strong>${name}</strong><br><span class="fine">${show}</span></span></label></td>`;
+  perfBox.insertAdjacentHTML("beforeend", `
+    <h3>${n + 9}. How many Tony-winning ${cat.title} performances (2016–2026) have you seen?</h3>
+    <p class="fine">Check the ones you saw in the role they won for. No ceremony in 2020; the 2021 awards covered the 2019–20 season.</p>
+    <p class="bulk"><button type="button" class="linkbtn" data-all="${cat.key}">Select all</button> &middot;
+      <button type="button" class="linkbtn" data-none="${cat.key}">Clear</button></p>
+    <div class="table-wrap">
+      <table class="prices perf-table">
+        <thead><tr><th>Year</th><th>Actress</th><th>Featured Actress</th><th>Actor</th><th>Featured Actor</th></tr></thead>
+        <tbody>${cat.rows.map(([year, ...people]) =>
+          `<tr><td class="price">${year}</td>${people.map((p, col) => cell(year, col, p)).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>
+    <div class="scoreboard">
+      <div class="score-you">You: <strong id="score-${cat.key}">0</strong> of ${total}</div>
+      <div class="score-maur" data-q="${cat.key}"></div>
+    </div>`);
+  lists[cat.key].wire();
+});
+
+/* ---------- Q11 special performances ---------- */
+const specialInputs = [...document.querySelectorAll(".special")];
+const savedSpecial = store.get("special") || {};
+specialInputs.forEach(inp => {
+  inp.value = savedSpecial[inp.id] ?? "";
+  inp.addEventListener("input", scoreSpecial);
+});
+function scoreSpecial() {
+  const vals = {}; let total = 0;
+  specialInputs.forEach(inp => { vals[inp.id] = inp.value; total += +inp.value || 0; });
+  document.getElementById("score-special").textContent = total;
+  store.set("special", vals);
+}
+scoreSpecial();
+
+/* ---------- Q12+ show checklists ---------- */
+const listBox = document.getElementById("list-questions");
+SHOW_LISTS.forEach((cat, n) => {
+  lists[cat.key] = checklist(cat.key);
+  listBox.insertAdjacentHTML("beforeend", `
+    <h3>${n + 12}. ${cat.q}</h3>
+    ${cat.note ? `<p class="fine">${cat.note}</p>` : ""}
+    <p class="bulk"><button type="button" class="linkbtn" data-all="${cat.key}">Select all</button> &middot;
+      <button type="button" class="linkbtn" data-none="${cat.key}">Clear</button></p>
+    <div class="check-grid tony-grid">${cat.items.map(show =>
+      `<label>${lists[cat.key].box(show, "I've seen " + show)} ${show}</label>`).join("")}</div>
+    <div class="scoreboard">
+      <div class="score-you">You: <strong id="score-${cat.key}">0</strong> of ${cat.items.length}</div>
+      <div class="score-maur" data-q="${cat.key}"></div>
+    </div>`);
+  lists[cat.key].wire();
+});
+
+/* ---------- Q18 2026–27 season (loads after the page is ready) ---------- */
+async function loadSeason() {
+  if (!SEASON_URL) return;
+  try {
+    const res = await fetch(SEASON_URL);
+    const data = await res.json();
+    /* only shows that have started performances (in previews or open), so you could have seen them */
+    const started = s => s.firstPreview ? parse(s.firstPreview) <= today
+      : s.status === "current" || (s.opening && parse(s.opening) <= today);
+    const shows = (data.shows || []).filter(s => s.title && started(s));
+    if (!shows.length) return;
+    lists.season = checklist("season");
+    document.getElementById("season-list").innerHTML = shows.map(s => {
+      const opening = s.opening ? parse(s.opening) : null;
+      /* the feed has no dates for shows that are already running, so those just show a closing date if there is one */
+      const closing = s.closing ? `closes ${fmt(parse(s.closing))}` : "";
+      const status = !opening ? "" : opening <= today ? `opened ${fmt(opening)}` : `in previews, opens ${fmt(opening)}`;
+      const when = [status, closing].filter(Boolean).join(" · ");
+      return `<label>${lists.season.box(s.title, "I've seen " + s.title)}
+        <span>${s.title}${when ? `<br><span class="fine">${when}</span>` : ""}</span></label>`;
+    }).join("");
+    document.getElementById("season-total").textContent = shows.length;
+    if (data.updated) document.getElementById("season-updated").textContent = ` (last checked ${fmt(new Date(data.updated))})`;
+    lists.season.wire();
+    document.getElementById("season-question").hidden = false;
+    setLocked("season", !!store.get("locked-season"));
+  } catch (e) {
+    /* feed not reachable: question stays hidden */
+  }
+}
+
+/* ---------- Maur's picks as a little picture you can click to enlarge ---------- */
+const COLS = ["Actress", "Featured Actress", "Actor", "Featured Actor"];
+function mauraThumb(q) {
+  const picks = new Set(MAUR[q].picks);
+  const perf = PERFORMERS.find(c => c.key === q), tony = TONYS.find(c => c.key === q);
+  const squares = perf
+    ? perf.rows.map(([year]) => COLS.map((_, col) => `<i class="${picks.has(year + "-" + col) ? "on" : ""}"></i>`).join("")).join("")
+    : tony.winners.map(([year]) => `<i class="${picks.has(String(year)) ? "on" : ""}"></i>`).join("");
+  return `<button type="button" class="maur-thumb" data-enlarge="${q}" aria-label="See Maur's picks">
+    <span class="mini-grid ${tony ? "wide" : ""}">${squares}</span><span class="fine">Tap to see Maur's picks</span></button>`;
+}
+function openPicks(q) {
+  const picks = new Set(MAUR[q].picks);
+  const dlg = document.getElementById("picks-dialog");
+  const tony = TONYS.find(c => c.key === q);
+  if (tony) {
+    dlg.querySelector("h3").textContent = `Maur's ${tony.title} winners`;
+    dlg.querySelector(".table-wrap").innerHTML = `<div class="check-grid tony-grid maur-picks">${tony.winners.map(([year, show]) =>
+      `<div class="${picks.has(String(year)) ? "on" : ""}">${picks.has(String(year)) ? "✓" : "&nbsp;&nbsp;"} <span class="num">${year}</span> ${show}</div>`).join("")}</div>`;
+    return dlg.showModal();
+  }
+  const cat = PERFORMERS.find(c => c.key === q);
+  dlg.querySelector("h3").textContent = `Maur's Tony-winning ${cat.title} performances`;
+  dlg.querySelector(".table-wrap").innerHTML = `<table class="prices perf-table maur-picks">
+    <thead><tr><th>Year</th>${COLS.map(c => `<th>${c}</th>`).join("")}</tr></thead>
+    <tbody>${cat.rows.map(([year, ...people]) => `<tr><td class="price">${year}</td>${people.map(([name, show], col) =>
+      `<td class="${picks.has(year + "-" + col) ? "on" : ""}">${picks.has(year + "-" + col) ? "✓ " : ""}<strong>${name}</strong><br><span class="fine">${show}</span></td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  dlg.showModal();
+}
+
+/* ---------- lock in answer -> head-to-head with Maur ---------- */
+/* the visitor's number for each question */
+function yourNumber(q) {
+  if (q === "thisYear") return THIS_YEAR.indexOf(store.get("thisYear"));   /* compared by range */
+  if (q === "mostTimes") return most.value === "" ? null : +most.value;
+  return +document.getElementById("score-" + q).textContent;
+}
+function maurNumber(q) {
+  const n = MAUR[q].n;
+  if (n == null) return null;
+  if (q === "thisYear") return THIS_YEAR_MAX.findIndex(max => n <= max);
+  return n;
+}
+/* everything you can change for a question */
+function inputsFor(q) {
+  if (q === "thisYear") return [...yearBox.querySelectorAll("button")];
+  if (q === "mostTimes") return [most];
+  if (q === "special") return specialInputs;
+  return [...document.querySelectorAll(`input[data-group="${q}"], [data-all="${q}"], [data-none="${q}"]`)];
+}
+function setLocked(q, locked) {
+  const slot = document.querySelector(`.score-maur[data-q="${q}"]`);
+  inputsFor(q).forEach(el => el.disabled = locked);
+  store.set("locked-" + q, locked);
+  if (!locked) {
+    slot.classList.remove("revealed");
+    slot.innerHTML = `<button type="button" class="lock-btn" data-lock="${q}">Lock in answer</button>`;
+    return;
+  }
+  const you = yourNumber(q), maur = maurNumber(q);
+  let verdict = "";
+  if (you != null && maur != null) {
+    verdict = you > maur ? "You win! 🏆" : you < maur ? "Maur wins! 🎭" : (q === "thisYear" ? "Tie: same range!" : "It's a tie!");
+  }
+  slot.classList.add("revealed");
+  slot.innerHTML = `Maur: <strong>${MAUR[q].text || "coming soon!"}</strong>
+    ${MAUR[q].picks ? mauraThumb(q) : ""}
+    ${verdict ? `<div class="verdict">${verdict}</div>` : ""}
+    <button type="button" class="linkbtn unlock" data-unlock="${q}">Change my answer</button>`;
+}
+document.querySelectorAll(".score-maur[data-q]").forEach(slot => setLocked(slot.dataset.q, !!store.get("locked-" + slot.dataset.q)));
+loadSeason();
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-all], [data-none], [data-lock], [data-unlock], [data-enlarge]");
+  if (!b) return;
+  if (b.dataset.enlarge) return openPicks(b.dataset.enlarge);
+  if (b.dataset.lock) return setLocked(b.dataset.lock, true);
+  if (b.dataset.unlock) return setLocked(b.dataset.unlock, false);
+  lists[b.dataset.all || b.dataset.none].setAll(!!b.dataset.all);
+});
+</script>
+</body>
+</html>

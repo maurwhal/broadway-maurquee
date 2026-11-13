@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ticket Quiz &middot; Broadway Maurquee</title>
+  <meta name="description" content="Looking for Broadway tickets? Answer a question or two and get Maur's cheapest options for your timeline.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Broadway <span>Maur</span>quee</a>
+    <a class="link" href="index.html">Home</a>
+    <a class="link" href="about.html">About Me</a>
+    <a class="link active" href="quiz.html">Buying Tickets Quiz</a>
+    <a class="link" href="guide.html">Affordable Tickets Guide</a>
+    <a class="link" href="sites.html">Websites &amp; Apps</a>
+    <a class="link" href="battle.html">Broadway Battle!!</a>
+    <a class="link" href="code.html">Maur's Code</a>
+  </div>
+</nav>
+
+<main class="subpage">
+<section class="quiz">
+  <h2>Looking for Tickets? Let me help!</h2>
+  <p class="lede" id="quiz-intro">Just a quick question or two and I will point you towards the best resources for what you need!</p>
+  <div id="quiz" aria-live="polite"></div>
+  <noscript><p>This quiz needs JavaScript. You can still read the <a href="guide.html">full guide</a>.</p></noscript>
+</section>
+</main>
+
+<footer>
+  <p class="footer-sign"><span class="lights" aria-hidden="true"></span><strong>Broadway <span class="maur">Maur</span>quee</strong><span class="lights right" aria-hidden="true"></span></p>
+  <p class="fine">Prices and rules change all the time. Last checked November 2026.</p>
+  <p class="fine">All content sourced and written by maurwhal/broadwaymaurquee. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
+</footer>
+
+<script>
+/* ---------- the tips (one place to edit each one) ---------- */
+const TIPS = {
+  boxOfficeRush: `<h4>In-person rush</h4><ul>
+    <li>Popular shows can have a line before the box office opens, and there's a set number of rush seats.</li>
+    <li>You can also pop into the box office close to showtime for a discount.</li></ul>`,
+  tkts: `<h4>TKTS booth</h4><ul>
+    <li>Same-day tickets. Best for groups of 3+.</li>
+    <li>I've heard the Lincoln Center booth has a way shorter line than Times Square.</li>
+    <li>Very rare for popular shows to be there. Check first: <a href="https://www.tdf.org/discount-ticket-programs/tkts-by-tdf/tkts-live/">TKTS Live</a>.</li></ul>`,
+  telechargeRush: `<h4>Telecharge digital rush</h4><ul>
+    <li>Usually opens at <span class="num">11:00 AM</span> and refreshes every 2 minutes. Nothing at 11:00? Try <span class="num">11:02</span>, <span class="num">11:04</span>, etc.</li>
+    <li>Max 2 tickets. Seats could be partial view or not together.</li>
+    <li>You can only rush every 3 days.</li>
+    <li><a href="https://rush.telecharge.com/">rush.telecharge.com</a></li></ul>`,
+  todaytixRush: `<h4>TodayTix rush</h4><ul>
+    <li>Filter by "Lottery &amp; Rush" in the app.</li>
+    <li>Usually goes live at <span class="num">9:00 AM</span>. Retry every 5 minutes (<span class="num">9:05</span>, <span class="num">9:10</span>...).</li>
+    <li>Lots of Off-Broadway shows too.</li></ul>`,
+  theatr: `<h4>Theatr <span class="pill">resale</span></h4><ul>
+    <li>Face value or less. No upcharging allowed.</li>
+    <li>Tickets go fast (about 40% are gone in 10 minutes), so keep checking.</li></ul>`,
+  telechargeLottery: `<h4>Telecharge lottery</h4><ul>
+    <li>Two drawings: <span class="num">10:00 AM</span> and <span class="num">3:00 PM</span>. Enter before 10 and you're in both.</li>
+    <li>Broadway: enter the day before the show. Off-Broadway: two days before.</li>
+    <li>Winning one show removes you from competing shows at the same time. Really want one show? Only enter that one.</li></ul>`,
+  bdLottery: `<h4>Broadway Direct lottery</h4><ul>
+    <li>Opens in the morning the day before and closes at <span class="num">3:00 PM</span>.</li>
+    <li>Each show is its own page, so it takes a while.</li>
+    <li>Has a stand-by: if winners don't buy, you might still get tickets after 3:00 PM.</li>
+    <li><a href="https://lottery.broadwaydirect.com/">lottery.broadwaydirect.com</a></li></ul>`,
+  alarms: `<h4>Set alarms/reminders</h4><ul>
+    <li><span class="num">8:55 AM</span> to get prepared for TodayTix rush.</li>
+    <li><span class="num">10:55 AM</span> to get ready for Telecharge rush.</li></ul>`,
+  tomorrowPlan: `<h4>What to do today:</h4><ul>
+    <li>Make sure you have an account and are signed in to the TodayTix app, the Telecharge lottery site, etc.</li>
+    <li>Enter the lottery for any shows of interest. Entering before <span class="num">10 AM</span> can double your chances on some lottery sites.</li></ul>
+    <h4 style="margin-top:14px">Set alarms/reminders for tomorrow:</h4><ul>
+    <li><span class="num">8:55 AM</span> to get prepared for TodayTix rush.</li>
+    <li><span class="num">10:55 AM</span> to get ready for Telecharge rush.</li></ul>
+    <h4 style="margin-top:14px">Turn on in-app alerts:</h4><ul>
+    <li>Turn on alerts in the TodayTix and Theatr apps to get notified when tickets pop up.</li></ul>`,
+  apps: `<h4>Download the apps and turn on alerts</h4><ul>
+    <li><strong>TodayTix</strong>: lottery and rush reminders</li>
+    <li><strong>Theatr</strong>: get notified when face-value resale tickets pop up</li></ul>`,
+  luckySeat: `<h4>Lucky Seat <span class="pill">enter ahead</span></h4><ul>
+    <li>The easiest lottery. You can enter for a week or more at a time.</li></ul>`,
+  hamilton: `<h4>Hamilton app <span class="pill">enter ahead</span></h4><ul>
+    <li>Hamilton has its own lottery app. You can enter for two weeks at a time.</li></ul>`,
+  dailyLotteries: `<h4>Daily lotteries</h4><ul>
+    <li>Telecharge and Broadway Direct open the day before each show, so enter every day for the dates you want.</li>
+    <li>TodayTix runs a few daily lotteries too.</li></ul>`,
+  youngMemberships: `<h4>Free memberships <span class="pill">limited seats</span></h4><ul>
+    <li><a href="https://www.roundabouttheatre.org/shows/hiptix/">HipTix</a> (18–40): <span class="num">$30</span> Roundabout tickets.</li>
+    <li><a href="https://www.lct.org/linctix/">LincTix</a> (18–35): <span class="num">$35–$40.50</span> Lincoln Center Theater tickets.</li>
+    <li><a href="https://www.manhattantheatreclub.com/_old-join/mtc35/">MTC35</a> (35 and under): <span class="num">$35</span> Manhattan Theatre Club tickets.</li>
+    <li>Heads up: member tickets are limited and may already be gone for this week, depending on the show.</li></ul>`,
+  onSaleAlerts: `<h4>Set alerts for on-sale dates</h4><ul>
+    <li>Membership tickets go on sale at a set time and popular shows go fast. Put the on-sale date in your calendar.</li></ul>`,
+  tdf: `<h4>TDF membership <span class="pill"><span class="num">$42</span>/year</span></h4><ul>
+    <li>You have to qualify (students, teachers, union members, etc.).</li>
+    <li>Broadway <span class="num">$53.50–$62.50</span>, Off-Broadway from <span class="num">$11</span>. Up to 4 weeks ahead, up to 9 people.</li>
+    <li><a href="https://www.tdf.org/discount-ticket-programs/tdf-membership/tdf-membership-qualifications/">Check if you qualify</a></li></ul>`,
+  broadwayWeek: `<h4>NYC Broadway Week</h4><ul>
+    <li>2-for-1 tickets to lots of shows. Runs a couple of times a year, so watch for the next one.</li></ul>`,
+  joinMemberships: `<h4>Join the free memberships now</h4><ul>
+    <li><a href="https://www.roundabouttheatre.org/shows/hiptix/">HipTix</a> (18–40), <a href="https://www.lct.org/linctix/">LincTix</a> (18–35), and <a href="https://www.manhattantheatreclub.com/_old-join/mtc35/">MTC35</a> (35 and under). <span class="num">$30–$40.50</span> tickets.</li>
+    <li>Planning ahead is how you beat the limited quantity.</li></ul>`,
+  audienceRewards: `<h4>Audience Rewards</h4><ul>
+    <li>Free points program for all 41 Broadway theaters. Sign up before your next purchase.</li>
+    <li><a href="https://www.audiencerewards.com/how-it-works">How it works</a></li></ul>`,
+  reddit: `<h4>r/Broadway for mailer codes</h4><ul>
+    <li>There's usually a pinned discount megathread with codes from mailers. Double-check them on the official site.</li>
+    <li><a href="https://www.reddit.com/r/Broadway/">r/Broadway</a></li></ul>`,
+  previews: `<h4>Look at previews</h4><ul>
+    <li>Usually cheaper. Things might still change, which is kind of fun.</li></ul>`
+};
+
+/* ---------- which tips show for each answer ---------- */
+/* when = the end of "Maur's Plan for You to see a Broadway Show ___!!" */
+const RESULTS = {
+  "today-inperson": { when: "Today", sub: "In person (NYC)", tips: ["boxOfficeRush", "tkts"] },
+  "today-online":   { when: "Today", sub: "Online", tips: ["telechargeRush", "todaytixRush", "theatr"] },
+  "today-both":     { when: "Today", sub: "In person + online", tips: ["telechargeRush", "todaytixRush", "theatr", "boxOfficeRush", "tkts"] },
+  "tomorrow":       { when: "Tomorrow", tips: ["tomorrowPlan", "telechargeLottery", "bdLottery"] },
+  "week":           { when: "This/Next Week", tips: ["luckySeat", "hamilton", "dailyLotteries", "alarms", "apps", "youngMemberships", "onSaleAlerts"] },
+  "ahead":          { when: "Down the Road", tips: ["tdf", "broadwayWeek", "joinMemberships", "audienceRewards", "reddit", "luckySeat", "hamilton", "previews"] }
+};
+
+const WARNINGS = `<div class="warn"><h4>Always buy from official sources</h4><p>Unofficial sites mark up tickets, and some are scams. See the <a href="guide.html#tips">tips &amp; warnings</a>.</p></div>
+  <div class="warn"><h4>Rush and lottery availability subject to change</h4><p>Not every show will have rush and lottery options for every performance. While it is a great option, it is not always guaranteed. Make sure you have a back-up plan.</p></div>`;
+
+const box = document.getElementById("quiz");
+
+function choiceButtons(options) {
+  return `<div class="choices">` + options.map(o =>
+    `<button class="choice" data-go="${o.go}">${o.label}${o.small ? `<small>${o.small}</small>` : ""}</button>`
+  ).join("") + `</div>`;
+}
+
+function show(step) {
+  document.getElementById("quiz-intro").hidden = !(step === "start" || step === "today");
+  if (step === "start") {
+    box.innerHTML = `<div class="quiz-step"><h3>How soon are you looking for tickets?</h3>` + choiceButtons([
+      { label: "Today!", small: "No day but today...", go: "today" },
+      { label: "Tomorrow", small: "Tomorrow, you're always a day away!", go: "tomorrow" },
+      { label: "This/next week", small: "Everything's coming up next week.", go: "week" },
+      { label: "Planning ahead", small: "I can Wait for It", go: "ahead" }
+    ]) + `</div>`;
+  } else if (step === "today") {
+    box.innerHTML = `<div class="quiz-step"><p class="crumbs">Today!</p><h3>In person, online, or both?</h3>` + choiceButtons([
+      { label: "In person", small: "I'm in NYC", go: "today-inperson" },
+      { label: "Online", go: "today-online" },
+      { label: "Both", go: "today-both" }
+    ]) + `<p><button class="linkbtn" data-go="start">&larr; Start over</button></p></div>`;
+  } else {
+    const r = RESULTS[step];
+    box.innerHTML = `<div class="result"><div class="plan-sign"><h3>Maur's Plan for You</h3>`
+      + `<p>to see a Broadway Show <span class="plan-when">${r.when}!!</span></p></div>`
+      + r.tips.map(t => `<div class="card">${TIPS[t]}</div>`).join("")
+      + WARNINGS
+      + `<p><button class="linkbtn" data-go="start">&larr; Start over</button></p>`
+      + `<div class="satisfied"><h3>Satisfied?</h3><div class="choices">
+           <a class="choice" href="index.html">Yes, I'm no longer Helpless</a>
+           <a class="choice" href="guide.html">I will never be Satisfied<small>Take me to the full guide</small></a>
+         </div></div></div>`;
+  }
+  box.querySelector("h3").setAttribute("tabindex", "-1");
+  if (step !== "start") box.querySelector("h3").focus();
+}
+
+box.addEventListener("click", e => {
+  const btn = e.target.closest("[data-go]");
+  if (btn) show(btn.dataset.go);
+});
+
+show("start");
+</script>
+</body>
+</html>

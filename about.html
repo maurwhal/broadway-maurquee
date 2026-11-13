@@ -13,10 +13,12 @@
   <div class="wrap">
     <a class="brand" href="index.html">Broadway <span>Maur</span>quee</a>
     <a class="link" href="index.html">Home</a>
-    <a class="link active" href="about.html">About</a>
-    <a class="link" href="guide.html">Budget Guide</a>
-    <a class="link" href="sites.html">Maur Approved</a>
-    <a class="link" href="code.html">Code</a>
+    <a class="link active" href="about.html">About Me</a>
+    <a class="link" href="quiz.html">Buying Tickets Quiz</a>
+    <a class="link" href="guide.html">Affordable Tickets Guide</a>
+    <a class="link" href="sites.html">Websites &amp; Apps</a>
+    <a class="link" href="battle.html">Broadway Battle!!</a>
+    <a class="link" href="code.html">Maur's Code</a>
   </div>
 </nav>
 
@@ -24,17 +26,133 @@
 <section id="about">
   <h2>About me</h2>
   <p class="lede">More coming soon! Favorite shows, stories, and my 41 theatre challenge.</p>
-  <ul class="socials">
-    <li><a href="https://www.instagram.com/broadwaymaurquee/">Instagram @broadwaymaurquee</a></li>
-    <li><a href="https://github.com/maurwhal">GitHub @maurwhal</a></li>
-  </ul>
+  <p class="center-row">
+    <a class="mini-marquee" href="https://www.instagram.com/broadwaymaurquee/">Instagram @broadway<span class="maur">maur</span>quee</a>
+  </p>
+  <div class="pigs" id="pigs"></div>
 </section>
 </main>
 
 <footer>
-  <p>Broadway Maurquee &middot; always buy from official sources &middot; <a href="#top">back to top</a></p>
+  <p class="footer-sign"><span class="lights" aria-hidden="true"></span><strong>Broadway <span class="maur">Maur</span>quee</strong><span class="lights right" aria-hidden="true"></span></p>
   <p class="fine">Prices and rules change all the time. Last checked November 2026.</p>
-  <p class="fine">All content sourced and written by maurwhal. AI-assisted tools helped refine and generate some of the site's code. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
+  <p class="fine">All content sourced and written by maurwhal/broadwaymaurquee. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
 </footer>
+<script>
+/* Pixel guinea pigs. Each letter is one pixel:
+   o = outline, a = main fur, b = patch, e = eye, n = nose, f = feet, . = empty */
+const PIG = [
+  "......oooooo.oo...",
+  "....ooaaaaaaoaaoo.",
+  "...oaaaaaaaaaaaaao",
+  "..oaaaaaaaaaaaeaao",
+  ".oaaaaaaaaaaaaaaan",
+  ".oaaaaaaaaaaaaaao.",
+  ".obbbbaaaaaaaaaao.",
+  "..obbbbbaaaaaaao..",
+  "...oooooooooooo...",
+  "....ff......ff...."
+];
+/* Each pig has her own drawing, facing right (letters are explained in each color list) */
+
+/* Moose: black, white band behind the head, white chest and rump */
+const MOOSE = [
+  "......oooooo.oo...",
+  "....ookkkkwwoggoo.",
+  "...okkkkkkwwkkkkko",
+  "..okkkkkkkwwkkekko",
+  ".owkkkkkkkwwkkkkkn",
+  ".owwkkkkkkkwwkkko.",
+  ".owwwkkkkkkwwwwwo.",
+  "..owwkkkkkkwwwwo..",
+  "...oooooooooooo...",
+  "....ff......ff...."
+];
+
+/* Coco: dark brown back, blonde shoulders, dark patch around the eye, white nose stripe */
+const COCO = [
+  "......oooooo.oo...",
+  "....ooddddyyokkoo.",
+  "...oddddddyyyywwwo",
+  "..odddddddyyddewwo",
+  ".oddddddddyyyddwwn",
+  ".odddddddddyyywwo.",
+  ".oddddddddddyywwo.",
+  "..oddddddddddddo..",
+  "...oooooooooooo...",
+  "....ff......ff...."
+];
+
+/* Peanut Butter: cream back half, chocolate front and head, white blaze, blonde cheeks */
+const PEANUT_BUTTER = [
+  "......oooooo.oo...",
+  "....oocccdddokkoo.",
+  "...occccdddddddwwo",
+  "..occcccddddddeywo",
+  ".occcccdddddddyyyn",
+  ".occccddddddddwwo.",
+  ".occccdddddddddwo.",
+  "..occcdddddddddo..",
+  "...oooooooooooo...",
+  "....ff......ff...."
+];
+
+/* Potato: blonde body, gray-brown head, dark around the eye, white chin */
+const POTATO = [
+  "......oooooo.oo...",
+  "....ooyyyyyyokkoo.",
+  "...oyyyyyyyggggggo",
+  "..oyyyyyyyyggdedgo",
+  ".oyyyyyyyyyygggggn",
+  ".oyyyyyyyyyyywwwo.",
+  ".oyyyyyyyyyyywwyo.",
+  "..oyyyyyyyyyyyyo..",
+  "...oooooooooooo...",
+  "....ff......ff...."
+];
+
+/* extra row on top of each pig for hair: a little mohawk, lots of spikes, or smooth */
+const MOHAWK = ".......o.o.o......";
+const SPIKY  = "......o.o.o.......";
+const SMOOTH = "..................";
+
+/* Coco gets spiky sides too */
+COCO[2] = "..oo" + COCO[2].slice(4);
+COCO[4] = "oo" + COCO[4].slice(2);
+COCO[6] = "oo" + COCO[6].slice(2);
+
+/* make the snout longer: stretches the face 2 pixels toward the nose */
+function longerFace(rows) {
+  return rows.map((row, y) => {
+    const fur = row[16], fur2 = row[15];
+    if (y === 3 || y === 4) return row.slice(0, 17) + fur + row[17] + ".";
+    if (y === 5) return row.slice(0, 16) + fur2 + row.slice(16) + ".";
+    return row + "..";
+  });
+}
+[MOOSE, COCO, PEANUT_BUTTER, POTATO].forEach(p => p.splice(0, p.length, ...longerFace(p)));
+/* left to right. size = width in pixels (Moose and Peanut Butter are the normal size) */
+const PIGS = [
+  { name: "Moose", rows: [MOHAWK, ...MOOSE], size: 126,
+    colors: { k: "#1e1e1e", w: "#ffffff", g: "#4a4a4a", o: "#000000", e: "#d8d8d8", n: "#3a3a3a", t: "#f4a6b8" } },
+  { name: "Coco", rows: [SPIKY, ...COCO], size: 95,
+    colors: { d: "#4a2c1a", y: "#f0d4a8", w: "#ffffff", k: "#f2a9a9", o: "#2a1a10", e: "#111111", l: "#b07a52", t: "#f4a6b8" } },
+  { name: "Peanut Butter", rows: [MOHAWK, ...PEANUT_BUTTER], size: 126,
+    colors: { c: "#f2dcb2", d: "#3e2418", y: "#e8c48a", w: "#ffffff", k: "#c9928a", o: "#24140c", e: "#111111", f: "#8a5a4a" } },
+  { name: "Potato", rows: [SMOOTH, ...POTATO], size: 158,
+    colors: { y: "#f1d9a8", g: "#8a7a66", d: "#4f4336", w: "#ffffff", k: "#f2b8b0", o: "#4a3a2a", e: "#111111", p: "#f8ead0" } }
+];
+const box = document.getElementById("pigs");
+for (const pig of PIGS) {
+  const colors = { n: "#f4a6b8", f: "#f4a6b8", ...pig.colors };
+  let rects = "";
+  /* the last row is the feet; it's left off so the pigs have no feet */
+  pig.rows.slice(0, -1).forEach((row, y) => [...row].forEach((ch, x) => {
+    if (colors[ch]) rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${colors[ch]}"/>`;
+  }));
+  box.insertAdjacentHTML("beforeend",
+    `<figure><svg viewBox="0 0 20 10" style="width:${pig.size}px" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg><figcaption>${pig.name}</figcaption></figure>`);
+}
+</script>
 </body>
 </html>

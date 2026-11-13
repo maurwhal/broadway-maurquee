@@ -20,43 +20,70 @@
 
 <!-- ================= INTRO ================= -->
 <section class="intro">
-  <p class="tagline">Cheap seats, lotteries, rush, and the sites I actually use.<br>No markups, no scams.</p>
-  <p>I'm known for my love of many things... my guinea pigs, Agatha Christie books, off-screen drama surrounding reality TV, and live theatre. However, of these, only my passion for Broadway results in numerous friends and family randomly texting me for advice.</p>
-  <p>Over the summer, I put together a resource document, which is the main bones of what you see here. I've been challenging myself to work on my coding skills more, and to use tools and programs to enhance my work, and here we are!!</p>
+  <p>I'm known for my love of many things... my guinea pigs <span class="pixel-pigs" id="pixel-pigs" role="img" aria-label="four tiny pixel guinea pigs"></span>, Agatha Christie books <span aria-hidden="true">🕵️‍♀️🔍</span>, off-screen drama surrounding reality TV <span aria-hidden="true">🌹🏝️💃</span>, and live theatre <span aria-hidden="true">🎭🗽</span>. However, of these, only my passion for Broadway results in numerous friends and family randomly texting me for advice.</p>
+  <p>Over the summer, I put together a guide, which is the main bones of what you see here. I've been challenging myself to work on my coding skills more, and to use tools and programs to enhance my work, and here we are!!</p>
 </section>
 
 <!-- ================= BUBBLES ================= -->
 <section class="bubbles" aria-label="Pages">
-  <a class="bubble" href="about.html">
-    <strong>About Me</strong>
-    <span>Favorite shows, stories, and my 41 theatre challenge</span>
-  </a>
-  <a class="bubble" href="guide.html">
-    <strong>Guide to Broadway on a Budget</strong>
-    <span>Lotteries, rush, apps, and memberships</span>
-  </a>
-  <a class="bubble" href="sites.html">
-    <strong>Maur Approved Websites &amp; Apps</strong>
-    <span>Where I check shows, seats, and reviews</span>
-  </a>
-  <a class="bubble" href="code.html">
-    <strong>Code for Broadway Tracking</strong>
-    <span>Build your own Broadway tracker</span>
-  </a>
+  <a class="bubble" href="about.html"><strong>About Me</strong></a>
+  <a class="bubble" href="quiz.html"><strong>Looking for Tickets?</strong><span>Let me help!</span></a>
+  <a class="bubble" href="guide.html"><strong>Guide to Broadway on a Budget</strong></a>
+  <a class="bubble" href="sites.html"><strong>Maur Approved Websites &amp; Apps</strong></a>
+  <a class="bubble" href="battle.html"><strong>Broadway Battle</strong></a>
+  <a class="bubble" href="code.html"><strong>Maur's Code for Tracking in Google Sheets</strong></a>
 </section>
 
-<ul class="socials center">
-  <li><a href="https://www.instagram.com/broadwaymaurquee/">Instagram @broadwaymaurquee</a></li>
-  <li><a href="https://github.com/maurwhal">GitHub @maurwhal</a></li>
-</ul>
+<p class="center-row">
+  <a class="mini-marquee" href="https://www.instagram.com/broadwaymaurquee/">Instagram @broadway<span class="maur">maur</span>quee</a>
+</p>
 
 </main>
 
 <footer>
-  <p>Broadway Maurquee &middot; always buy from official sources</p>
+  <p class="footer-sign"><span class="lights" aria-hidden="true"></span><strong>Broadway <span class="maur">Maur</span>quee</strong><span class="lights right" aria-hidden="true"></span></p>
   <p class="fine">Prices and rules change all the time. Last checked November 2026.</p>
-  <p class="fine">All content sourced and written by maurwhal. AI-assisted tools helped refine and generate some of the site's code. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
+  <p class="fine">All content sourced and written by maurwhal/broadwaymaurquee. Not affiliated with any theatre, show, or ticketing company mentioned. Screenshots belong to their respective owners.</p>
 </footer>
 
+<script>
+/* Tiny front-facing guinea pigs. Each letter is one pixel:
+   o = outline, r = ears, a = left fur, c = right fur, s = nose stripe,
+   h = cheeks, m = chin/chest, u = under the nose, e = eye, n = nose, . = empty */
+const FACE = [
+  "..rr......rr..",
+  ".rrroooooorrr.",
+  "rroaaasscccorr",
+  ".oaaaasscccco.",
+  ".oaeaasscceco.",
+  ".oaaaasscccco.",
+  ".oaaaanncccco.",
+  ".ohhaasscchho.",
+  ".ohhhasschhho.",
+  "..ohamuumcho..",
+  "...oooooooo..."
+];
+/* same order as the About page: Moose, Coco, Peanut Butter, Potato */
+const FACES = [
+  /* Moose: black face, gray ears, white under the nose */
+  { o: "#000000", r: "#4a4a4a", a: "#1e1e1e", c: "#1e1e1e", s: "#1e1e1e", h: "#1e1e1e", m: "#1e1e1e", u: "#ffffff", e: "#9a9a9a", n: "#3a3a3a" },
+  /* Coco: dark brown around the eyes, white blaze, blonde cheeks, white chin */
+  { o: "#2a1a10", r: "#d9a08f", a: "#4a2c1a", c: "#4a2c1a", s: "#ffffff", h: "#f0d4a8", m: "#ffffff", u: "#ffffff", e: "#111111" },
+  /* Peanut Butter: chocolate face, wide white blaze and muzzle */
+  { o: "#24140c", r: "#7a4a3a", a: "#3e2418", c: "#3e2418", s: "#ffffff", h: "#ffffff", m: "#3e2418", u: "#ffffff", e: "#111111" },
+  /* Potato: blonde face, lighter muzzle, white chin */
+  { o: "#4a3a2a", r: "#d9a08f", a: "#d6b27a", c: "#d6b27a", s: "#ecd3a4", h: "#e3c28e", m: "#ffffff", u: "#ffffff", e: "#111111" }
+];
+const pigBox = document.getElementById("pixel-pigs");
+for (const colors of FACES) {
+  const pal = { n: "#f4a6b8", ...colors };
+  let rects = "";
+  FACE.forEach((row, y) => [...row].forEach((ch, x) => {
+    if (pal[ch]) rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${pal[ch]}"/>`;
+  }));
+  pigBox.insertAdjacentHTML("beforeend",
+    `<svg viewBox="0 0 14 11" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`);
+}
+</script>
 </body>
 </html>
